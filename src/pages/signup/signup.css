@@ -180,6 +180,12 @@
   .feature-container{
     margin-top: 5px;
   }
-
+  
+  .select-box{
+   width: 25vw; 
+   height: 45px;
+   margin-bottom: 16px;
+   color: #818181;
+  }
 
   }

@@ -100,14 +100,18 @@ const SignIn = () => {
     });
 
     const data = JSON.parse(localStorage.getItem("User"));
-  
+    const restaurantData = JSON.parse(localStorage.getItem("Restaurant"));
     // console.log(data[input.email]);
-     let  particularUser=null;
-    if(data){
+    let particularUser = null;
+    let particularRestaurant = null;
+    if (restaurantData) {
+      particularRestaurant = restaurantData[input.email];
+    }
+    if (data) {
       particularUser = data[input.email];
     }
     if (currentEmailError || currentPasswordError) {
-          alert("please enter right information")
+      alert("please enter right information");
     } else if (
       data &&
       particularUser &&
@@ -117,12 +121,33 @@ const SignIn = () => {
       console.log("User Email id is :", input.email);
       console.log("User Password is :", input.password);
       alert(" User successfuly Sign in !");
-      localStorage.setItem(
-        "current-user",
-        JSON.stringify(particularUser)
-      );
+      localStorage.setItem("current-user", JSON.stringify(particularUser));
       navigate("/home", {
         state: [input.email, input.password, particularUser.firstName],
+      });
+      setError({
+        emailError: false,
+        passwordError: false,
+      });
+      setInput({
+        email: "",
+        password: "",
+      });
+    } else if (
+      restaurantData &&
+      particularRestaurant &&
+      particularRestaurant.email === input.email &&
+      particularRestaurant.password === input.password
+    ) {
+      console.log("Restaurant Email id is :", input.email);
+      console.log("Restaurant Password is :", input.password);
+      alert(" User successfuly Sign in !");
+      localStorage.setItem(
+        "current-user",
+        JSON.stringify(particularRestaurant)
+      );
+      navigate("/dashboard", {
+        state: [input.email, input.password, particularRestaurant.firstName],
       });
       setError({
         emailError: false,
@@ -170,7 +195,7 @@ const SignIn = () => {
               )}
               <Box className="input">
                 <CustomInput
-                value={input.password}
+                  value={input.password}
                   errorState={error.passwordError}
                   className="input-password"
                   handlerState={handlePassword}

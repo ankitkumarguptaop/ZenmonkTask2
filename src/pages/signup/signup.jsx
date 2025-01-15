@@ -12,6 +12,7 @@ import Checkbox from "@mui/material/Checkbox";
 
 import CustomInput from "../../components/input/input";
 import "./signup.css";
+import { MenuItem, Select } from "@mui/material";
 const SignUp = () => {
   const navigate = useNavigate();
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
@@ -32,11 +33,13 @@ const SignUp = () => {
     passwordError: false,
   });
 
+  const [userType, setUserType] = useState("user");
+
   function handleFirstName(e) {
     // setName(e.target.value);
     setInput({
       email: input.email,
-      firstName: e.target.value.replace(/\s+/g, " ").trim(),
+      firstName: e.target.value,
       lastName: input.email,
       password: input.password,
     });
@@ -65,38 +68,38 @@ const SignUp = () => {
     }
   }
 
-  function handleLastName(e) {
-    // setName(e.target.value);
-    setInput({
-      email: input.email,
-      firstName: input.firstName,
-      lastName: e.target.value.replace(/\s+/g, " ").trim(),
-      password: input.password,
-    });
-    if (e.target.value.replace(/\s+/g, " ").trim().length <= 0) {
-      setError({
-        emailError: error.emailError,
-        passwordError: error.passwordError,
-        firstNameError: error.firstNameError,
-        lastNameError: true,
-      });
-    } else {
-      setError({
-        emailError: error.emailError,
-        passwordError: error.passwordError,
-        firstNameError: error.firstNameError,
-        lastNameError: false,
-      });
-    }
-    if (e.target.value.length <= 0) {
-      setError({
-        emailError: error.emailError,
-        passwordError: error.passwordError,
-        firstNameError: error.firstNameError,
-        lastNameError: false,
-      });
-    }
-  }
+  // function handleLastName(e) {
+  //   // setName(e.target.value);
+  //   setInput({
+  //     email: input.email,
+  //     firstName: input.firstName,
+  //     lastName: e.target.value.replace(/\s+/g, " ").trim(),
+  //     password: input.password,
+  //   });
+  //   if (e.target.value.replace(/\s+/g, " ").trim().length <= 0) {
+  //     setError({
+  //       emailError: error.emailError,
+  //       passwordError: error.passwordError,
+  //       firstNameError: error.firstNameError,
+  //       lastNameError: true,
+  //     });
+  //   } else {
+  //     setError({
+  //       emailError: error.emailError,
+  //       passwordError: error.passwordError,
+  //       firstNameError: error.firstNameError,
+  //       lastNameError: false,
+  //     });
+  //   }
+  //   if (e.target.value.length <= 0) {
+  //     setError({
+  //       emailError: error.emailError,
+  //       passwordError: error.passwordError,
+  //       firstNameError: error.firstNameError,
+  //       lastNameError: false,
+  //     });
+  //   }
+  // }
 
   function handleEmail(e) {
     setInput({
@@ -165,6 +168,11 @@ const SignUp = () => {
     }
   }
 
+  function handleSelectBox(e) {
+    setUserType(e.target.value);
+    console.log(userType);
+  }
+
   function handleSignUp(e) {
     e.preventDefault();
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -196,18 +204,18 @@ const SignUp = () => {
       //   lastNameError:error.lastNameError
       // });
     }
-    if (
-      input.lastName.replace(/\s+/g, " ").trim().length <= 0 ||
-      input.lastName <= 0
-    ) {
-      currentLastnameError = true;
-      // setError({
-      //   emailError: error.emailError,
-      //   passwordError: error.passwordError,
-      //   firstNameError: error.lastNameError,
-      //   lastNameError:true
-      // });
-    }
+    // if (
+    //   input.lastName.replace(/\s+/g, " ").trim().length <= 0 ||
+    //   input.lastName <= 0
+    // ) {
+    //   currentLastnameError = true;
+    //   // setError({
+    //   //   emailError: error.emailError,
+    //   //   passwordError: error.passwordError,
+    //   //   firstNameError: error.lastNameError,
+    //   //   lastNameError:true
+    //   // });
+    // }
     if (!passwordPattern.test(input.password)) {
       currentPasswordError = true;
       // setError({
@@ -224,50 +232,96 @@ const SignUp = () => {
       firstNameError: currentFirstNameError,
       lastNameError: currentLastnameError,
     });
-
-    const data = JSON.parse(localStorage.getItem("User"));
-    let particularUser = null;
-    if (data) {
-      particularUser = data[input.email];
-    }
-
-    if (particularUser) {
-      alert("Already register!");
-      navigate("/");
-    } else if (
-      passwordPattern.test(input.password) &&
-      input.firstName.replace(/\s+/g, " ").trim().length > 0 &&
-      emailPattern.test(input.email)
-    ) {
-      alert("Successful Signin!");
-      setError({
-        emailError: false,
-        passwordError: false,
-        firstNameError: false,
-        lastNameError: false,
-      });
-
+    if (userType === "user") {
       const data = JSON.parse(localStorage.getItem("User"));
+      let particularUser = null;
+      if (data) {
+        particularUser = data[input.email];
+      }
 
-      let Alluserinfo = {
-        ...data,
-        [input.email]: {
-          email: input.email,
-          password: input.password,
-          firstName: input.firstName,
-          lastName: input.lastName,
-        },
-      };
+      if (particularUser) {
+        alert("Already register!");
+        navigate("/");
+      } else if (
+        passwordPattern.test(input.password) &&
+        input.firstName.replace(/\s+/g, " ").trim().length > 0 &&
+        emailPattern.test(input.email)
+      ) {
+        alert("Successful Signin!");
+        setError({
+          emailError: false,
+          passwordError: false,
+          firstNameError: false,
+          lastNameError: false,
+        });
 
-      localStorage.setItem("User", JSON.stringify(Alluserinfo));
+        const data = JSON.parse(localStorage.getItem("User"));
 
-      navigate("/");
-      setInput({
-        email: "",
-        password: "",
-        firstName: "",
-        lastName: "",
-      });
+        let Alluserinfo = {
+          ...data,
+          [input.email]: {
+            email: input.email,
+            password: input.password,
+            firstName: input.firstName,
+            lastName: input.lastName,
+          },
+        };
+
+        localStorage.setItem("User", JSON.stringify(Alluserinfo));
+
+        navigate("/");
+        setInput({
+          email: "",
+          password: "",
+          firstName: "",
+          lastName: "",
+        });
+      }
+    } else {
+      const data = JSON.parse(localStorage.getItem("Restaurant"));
+      let particularUser = null;
+      if (data) {
+        particularUser = data[input.email];
+      }
+
+      if (particularUser) {
+        alert("Already register!");
+        navigate("/");
+      } else if (
+        passwordPattern.test(input.password) &&
+        input.firstName.replace(/\s+/g, " ").trim().length > 0 &&
+        emailPattern.test(input.email)
+      ) {
+        alert("Successful Signin!");
+        setError({
+          emailError: false,
+          passwordError: false,
+          firstNameError: false,
+          lastNameError: false,
+        });
+
+        const data = JSON.parse(localStorage.getItem("Restaurant"));
+
+        let Alluserinfo = {
+          ...data,
+          [input.email]: {
+            email: input.email,
+            password: input.password,
+            firstName: input.firstName,
+            lastName: input.lastName,
+          },
+        };
+
+        localStorage.setItem("Restaurant", JSON.stringify(Alluserinfo));
+
+        navigate("/");
+        setInput({
+          email: "",
+          password: "",
+          firstName: "",
+          lastName: "",
+        });
+      }
     }
   }
 
@@ -288,7 +342,7 @@ const SignUp = () => {
                   errorState={error.firstNameError}
                   className="input-password"
                   handlerState={handleFirstName}
-                  label="First Name:"
+                  label="Name:"
                 ></CustomInput>
                 {error.firstNameError && (
                   <Box
@@ -303,13 +357,23 @@ const SignUp = () => {
                 )}
               </Box>
               <Box className="input">
-                <CustomInput
+                <Select
+                  className="select-box"
+                  value={userType}
+                  onChange={handleSelectBox}
+                  displayEmpty
+                  inputProps={{ "aria-label": "Without label" }}
+                >
+                  <MenuItem value={"user"}>User</MenuItem>
+                  <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
+                </Select>
+                {/* <CustomInput
                   value={input.lastName}
                   errorState={error.lastNameError}
                   className="input-password"
                   handlerState={handleLastName}
                   label="Last Name:"
-                ></CustomInput>
+                ></CustomInput> */}
               </Box>
               {error.lastNameError && (
                 <Box
@@ -402,14 +466,10 @@ const SignUp = () => {
               </Box>
             </Box>
             <Box className="continue-with">
-              <Box className="line">
-                <br />
-              </Box>
+              <Box className="line"></Box>
 
               <Box className="continue-text">Or continue with</Box>
-              <Box className="line">
-                <br />
-              </Box>
+              <Box className="line"></Box>
             </Box>
 
             <Box className="third-party-signin">

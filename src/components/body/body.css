@@ -1,0 +1,29 @@
+.body{
+    display: flex;
+    justify-content: space-around;
+    height: 90vh;
+    width: 100vw;
+    background-color: aqua;
+}
+
+.restaurant-card{
+    margin: 20px;
+    img{
+        height: 250px;
+        width: 400px;
+        border-radius: 10px;
+    }
+
+    .details-container{
+        display: flex;
+        height: 30px; 
+        width: 400px;
+        align-items: center;
+        justify-content: center;
+    }
+    .restaurant-details{
+
+       
+    }
+
+}

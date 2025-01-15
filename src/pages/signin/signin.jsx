@@ -9,11 +9,11 @@ import google from "../../images/google.png";
 import instagram from "../../images/instagram.png";
 import twitter from "../../images/twitter.png";
 import { useState } from "react";
-import{Link} from "react-router-dom"
+import{Link,useNavigate} from "react-router-dom"
 // import Typography from '@mui/material/Typography';
 
 const SignIn = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -96,26 +96,28 @@ const SignIn = () => {
       passwordError: currentPasswordError,
     });
 
-    // const data =JSON.parse(localStorage.getItem(input.email));
-    //  if(data && data.email===input.email && data.password===input.password){
-    //   console.log("User Email id is :", input.email);
-    //   console.log("User Password is :", input.password);
-    //   alert(" User successfuly Sign in !");
-    //   localStorage.setItem( "current-user" , JSON.stringify(
-    //     data.email))
-    //   navigate("/home", { state: [input.email, input.password , data.name] });
-    //   setError({
-    //     emailError: false,
-    //     passwordError: false,
-    //   });
-    //   setInput({
-    //     email: "",
-    //     password: "",
-    //   });
-    //  }
-    //  else{
-    //   alert("Need to register first!")
-    //  }
+    const data =JSON.parse(localStorage.getItem("User"));
+    const particularUser = data[input.email];
+    // console.log(data[input.email]);
+     if(data &&  particularUser && particularUser.email=== input.email && particularUser.password===input.password){
+      console.log("User Email id is :", input.email);
+      console.log("User Password is :", input.password);
+      alert(" User successfuly Sign in !");
+      localStorage.setItem( "current-user" , JSON.stringify(
+        particularUser.email))
+      navigate("/home", { state: [input.email, input.password , particularUser.firstName] });
+      setError({
+        emailError: false,
+        passwordError: false,
+      });
+      setInput({
+        email: "",
+        password: "",
+      });
+     }
+     else{
+      alert("Need to register first!")
+     }
   }
 
   return (

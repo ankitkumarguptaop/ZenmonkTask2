@@ -235,14 +235,23 @@ const SignUp = () => {
         lastNameError: false,
       });
 
+
+      const data =JSON.parse(localStorage.getItem("User"))
+
+      let Alluserinfo={
+        ...data,
+        [input.email]:{
+          email: input.email,
+          password: input.password,
+          firstName: input.firstName,
+          lastName: input.lastName,
+        }
+        
+       }
+
       localStorage.setItem(
        "User",
-        // JSON.stringify({User.input.email{
-        //   email: input.email,
-        //   password: input.password,
-        //   firstName: input.firstName,
-        //   lastName: input.lastName,
-        // }})
+        JSON.stringify(Alluserinfo)
       );
 
       navigate("/");
@@ -274,7 +283,7 @@ const SignUp = () => {
                   id="outlined-required"
                   label="First Name:"
                   size="small"
-                  disableRipple
+                  // diableripple
                   onChange={handleFirstName}
                   sx={{
                     input: {
@@ -296,7 +305,7 @@ const SignUp = () => {
                   id="outlined-required"
                   label="Last Name:"
                   size="small"
-                  disableRipple
+                  // diableripple
                   sx={{
                     input: {
                       height: "26px",
@@ -318,7 +327,7 @@ const SignUp = () => {
                   id="outlined-required"
                   label="Email Address:"
                   size="small"
-                  disableRipple
+                  // diableripple
                   // disableElevation
                   sx={{
                     input: {
@@ -341,7 +350,7 @@ const SignUp = () => {
                   id="outlined-required"
                   label="Create Password:"
                   size="small"
-                  disableRipple
+                  // diableripple
                   sx={{
                     input: { height: "26px", color: "#818181" },
                     color: "#818181",
@@ -359,7 +368,7 @@ const SignUp = () => {
               </Box>
               <Button
                 onClick={handleSignUp}
-                disableRipple
+                // diableripple
                 disableElevation
                 sx={{
                   bgcolor: "#7754f6",

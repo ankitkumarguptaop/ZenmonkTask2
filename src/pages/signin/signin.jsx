@@ -9,11 +9,15 @@ import google from "../../images/google.png";
 import instagram from "../../images/instagram.png";
 import twitter from "../../images/twitter.png";
 import { useState } from "react";
-import{Link,useNavigate} from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
+import Checkbox from '@mui/material/Checkbox';
+
 // import Typography from '@mui/material/Typography';
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const label = { inputProps: { 'aria-label': 'Checkbox demo'}};
+
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -96,16 +100,29 @@ const SignIn = () => {
       passwordError: currentPasswordError,
     });
 
-    const data =JSON.parse(localStorage.getItem("User"));
+    const data = JSON.parse(localStorage.getItem("User"));
     const particularUser = data[input.email];
     // console.log(data[input.email]);
-     if(data &&  particularUser && particularUser.email=== input.email && particularUser.password===input.password){
+
+     if(currentEmailError || currentPasswordError){
+     
+     }
+     else if (
+      data &&
+      particularUser &&
+      particularUser.email === input.email &&
+      particularUser.password === input.password
+    ) {
       console.log("User Email id is :", input.email);
       console.log("User Password is :", input.password);
       alert(" User successfuly Sign in !");
-      localStorage.setItem( "current-user" , JSON.stringify(
-        particularUser.email))
-      navigate("/home", { state: [input.email, input.password , particularUser.firstName] });
+      localStorage.setItem(
+        "current-user",
+        JSON.stringify(particularUser.email)
+      );
+      navigate("/home", {
+        state: [input.email, input.password, particularUser.firstName],
+      });
       setError({
         emailError: false,
         passwordError: false,
@@ -114,10 +131,9 @@ const SignIn = () => {
         email: "",
         password: "",
       });
-     }
-     else{
-      alert("Need to register first!")
-     }
+    } else {
+      alert("Need to register first!");
+    }
   }
 
   return (
@@ -145,13 +161,23 @@ const SignIn = () => {
                       height: "26px",
                       borderRadius: "10px",
                       color: "#818181",
-                      margin:"0px"
+                      margin: "0px",
                     },
                     color: "#818181",
                   }}
                 />
               </Box>
-              { error.emailError && <Box style={{color:"red" , marginTop:"-14px" ,marginBottom:"13px"}}>Enter correct email</Box>}
+              {error.emailError && (
+                <Box
+                  style={{
+                    color: "red",
+                    marginTop: "-14px",
+                    marginBottom: "13px",
+                  }}
+                >
+                  Enter correct email
+                </Box>
+              )}
               <Box className="input">
                 <TextField
                   error={error.passwordError}
@@ -165,18 +191,31 @@ const SignIn = () => {
                       height: "26px",
                       borderRadius: "10px",
                       color: "#818181",
-                      margin:"0px",
-                     
+                      margin: "0px",
                     },
                     color: "#818181",
                   }}
                 />
               </Box>
-              { error.passwordError && <Box style={{color:"red" , marginTop:"-14px" ,marginBottom:"13px"}}>Enter correct password</Box>}
+              {error.passwordError && (
+                <Box
+                  style={{
+                    color: "red",
+                    marginTop: "-14px",
+                    marginBottom: "13px",
+                  }}
+                >
+                  Enter correct password
+                </Box>
+              )}
               <Box className="feature-container">
                 <Box className="check-box">
-                  <input id="check" type="checkbox" />
-                  Keep me logged in
+                  <Checkbox  sx={{
+                           color: "#7754F6",
+                         '&.Mui-checked': {
+                           color: "#7754F6",
+                            },
+                            }} {...label} />  Keep me logged in
                 </Box>
                 <Box className="forgot-password">
                   <a href="./">Forget password?</a>

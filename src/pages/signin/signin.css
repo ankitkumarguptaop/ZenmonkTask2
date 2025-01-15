@@ -60,8 +60,8 @@
 .feature-container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15px;
-
+  margin-bottom: 10px;
+  align-items: center;
 }
 
 .input {
@@ -107,6 +107,7 @@
 .sinin-button{
   background-color: #7754f6 !important;
   color: #FFFFFF !important;
+  
 }
 
 
@@ -123,6 +124,7 @@
     color: #7754f6 !important;
     font-family: "Inter", serif;
     text-decoration: none;
+    font-weight:500;
 
   }
 }
@@ -171,6 +173,7 @@
 }
 
 .feature-container{
-  margin-top: 20px;
+  
+  margin-top: 10px;
 }
 

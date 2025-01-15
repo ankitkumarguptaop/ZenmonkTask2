@@ -61,7 +61,8 @@
   .feature-container {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    align-items: center;
   
   }
   
@@ -104,27 +105,33 @@
     font-size: 14px;
   }
   
-  .sinin-button{
+  .sinup-button{
     background-color: #7754f6 !important;
     color: #FFFFFF !important;
   }
   
   
   
-  .signup-link{
+  .signin-link{
     margin-top: 15px;
     span{
     font-family: "Inter", serif;
   
       color: #818181;
       font-size: 14px;
+      
     }
-    Link{
+ 
+    a{
+      
       color: #7754f6 !important;
       font-family: "Inter", serif;
       text-decoration: none;
+      font-weight: 500;
+
   
     }
+    
   }
   
   
@@ -171,7 +178,7 @@
   }
   
   .feature-container{
-    margin-top: 20px;
+    margin-top: 5px;
   }
 
 

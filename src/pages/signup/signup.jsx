@@ -8,10 +8,12 @@ import google from "../../images/google.png";
 import instagram from "../../images/instagram.png";
 import twitter from "../../images/twitter.png";
 import { useState } from "react";
-import { useNavigate  ,Link} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import Checkbox from '@mui/material/Checkbox';
 import "./signup.css";
 const SignUp = () => {
   const navigate = useNavigate();
+  const label = { inputProps: { 'aria-label': 'Checkbox demo'}};
 
   const [input, setInput] = useState({
     firstName: "",
@@ -222,14 +224,12 @@ const SignUp = () => {
       lastNameError: currentLastnameError,
     });
 
-
-    const data =JSON.parse(localStorage.getItem("User"));
+    const data = JSON.parse(localStorage.getItem("User"));
     const particularUser = data[input.email];
-    if(particularUser){
+    if (particularUser) {
       alert("Already register!");
       navigate("/");
-    }
-    else if (
+    } else if (
       passwordPattern.test(input.password) &&
       input.firstName.replace(/\s+/g, " ").trim().length > 0 &&
       emailPattern.test(input.email)
@@ -242,24 +242,19 @@ const SignUp = () => {
         lastNameError: false,
       });
 
+      const data = JSON.parse(localStorage.getItem("User"));
 
-      const data =JSON.parse(localStorage.getItem("User"))
-
-      let Alluserinfo={
+      let Alluserinfo = {
         ...data,
-        [input.email]:{
+        [input.email]: {
           email: input.email,
           password: input.password,
           firstName: input.firstName,
           lastName: input.lastName,
-        }
-        
-       }
+        },
+      };
 
-      localStorage.setItem(
-       "User",
-        JSON.stringify(Alluserinfo)
-      );
+      localStorage.setItem("User", JSON.stringify(Alluserinfo));
 
       navigate("/");
       setInput({
@@ -301,8 +296,17 @@ const SignUp = () => {
                     color: "#818181",
                   }}
                 />
-              { error.firstNameError && <Box style={{color:"red" , marginTop:"-14px" ,marginBottom:"10px"}}>Enter correct Firstname</Box>}
-               
+                {error.firstNameError && (
+                  <Box
+                    style={{
+                      color: "red",
+                      marginTop: "-14px",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    Enter correct firstname
+                  </Box>
+                )}
               </Box>
               <Box className="input">
                 <TextField
@@ -324,7 +328,17 @@ const SignUp = () => {
                   onChange={handleLastName}
                 />
               </Box>
-              { error.lastNameError && <Box style={{color:"red" , marginTop:"-14px" ,marginBottom:"10px"}}>Enter correct Lastname</Box>}
+              {error.lastNameError && (
+                <Box
+                  style={{
+                    color: "red",
+                    marginTop: "-14px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  Enter correct lastname
+                </Box>
+              )}
 
               <Box className="input">
                 <TextField
@@ -347,7 +361,17 @@ const SignUp = () => {
                   onChange={handleEmail}
                 />
               </Box>
-              { error.emailError && <Box style={{color:"red" , marginTop:"-14px" ,marginBottom:"10px"}}>Enter correct email</Box>}
+              {error.emailError && (
+                <Box
+                  style={{
+                    color: "red",
+                    marginTop: "-14px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  Enter correct email
+                </Box>
+              )}
 
               <Box className="input">
                 <TextField
@@ -365,12 +389,27 @@ const SignUp = () => {
                   onChange={handlePassword}
                 />
               </Box>
-              { error.passwordError && <Box style={{color:"red" , marginTop:"-14px" ,marginBottom:"10px"}}>Enter correct Password</Box>}
+              {error.passwordError && (
+                <Box
+                  style={{
+                    color: "red",
+                    marginTop: "-14px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  Enter correct password
+                </Box>
+              )}
 
               <Box className="feature-container">
                 <Box className="check-box">
-                  <input id="check" type="checkbox" />I agree to the terms and
-                  privacy policy
+                 <Checkbox  sx={{
+            color: "#7754F6",
+          '&.Mui-checked': {
+            color: "#7754F6",
+             },
+             }} {...label} />
+                 I agree to the terms and privacy policy
                 </Box>
               </Box>
               <Button
@@ -382,19 +421,19 @@ const SignUp = () => {
                   color: "#FFFFFF",
                   width: "25vw",
                   height: "45px",
-                  marginTop: "10px",
+                  marginTop: "-5px",
                   borderRadius: "10px",
                   textTransform: "none",
                 }}
-                className="sinin-button"
+                className="sinup-button"
               >
                 Create an account
               </Button>
             </form>
-            <Box className="signup-link">
-              <span>
+            <Box className="signin-link">
+              <Box component={"span"}>
                 Alredy a member? <Link to="/">Login</Link>{" "}
-              </span>
+              </Box>
             </Box>
             <Box className="continue-with">
               <Box className="line">

@@ -2,18 +2,19 @@ import React from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import LeftImage from "../../images/left-image.png";
-import TextField from "@mui/material/TextField";
 import facebook from "../../images/facebook.png";
 import google from "../../images/google.png";
 import instagram from "../../images/instagram.png";
 import twitter from "../../images/twitter.png";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import Checkbox from '@mui/material/Checkbox';
+import Checkbox from "@mui/material/Checkbox";
+
+import CustomInput from "../../components/input/input";
 import "./signup.css";
 const SignUp = () => {
   const navigate = useNavigate();
-  const label = { inputProps: { 'aria-label': 'Checkbox demo'}};
+  const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
   const [input, setInput] = useState({
     firstName: "",
@@ -278,24 +279,7 @@ const SignUp = () => {
           <Box className="form">
             <form action="">
               <Box className="input">
-                <TextField
-                  // required
-                  error={error.firstNameError}
-                  className="input-password"
-                  id="outlined-required"
-                  label="First Name:"
-                  size="small"
-                  // diableripple
-                  onChange={handleFirstName}
-                  sx={{
-                    input: {
-                      height: "26px",
-                      borderRadius: "10px",
-                      color: "#818181",
-                    },
-                    color: "#818181",
-                  }}
-                />
+              <CustomInput errorState={error.firstNameError} className="input-password" handlerState={handleFirstName} label="First Name:"></CustomInput>
                 {error.firstNameError && (
                   <Box
                     style={{
@@ -309,24 +293,7 @@ const SignUp = () => {
                 )}
               </Box>
               <Box className="input">
-                <TextField
-                  // required
-                  error={error.lastNameError}
-                  className="input-password"
-                  id="outlined-required"
-                  label="Last Name:"
-                  size="small"
-                  // diableripple
-                  sx={{
-                    input: {
-                      height: "26px",
-                      borderRadius: "10px",
-                      color: "#818181",
-                    },
-                    color: "#818181",
-                  }}
-                  onChange={handleLastName}
-                />
+              <CustomInput errorState={error.lastNameError}    className="input-password" handlerState={handleLastName} label="Last Name:"></CustomInput>
               </Box>
               {error.lastNameError && (
                 <Box
@@ -339,27 +306,8 @@ const SignUp = () => {
                   Enter correct lastname
                 </Box>
               )}
-
               <Box className="input">
-                <TextField
-                  className="input-email"
-                  // required
-                  error={error.emailError}
-                  id="outlined-required"
-                  label="Email Address:"
-                  size="small"
-                  // diableripple
-                  // disableElevation
-                  sx={{
-                    input: {
-                      height: "26px",
-                      borderRadius: "10px",
-                      color: "#818181",
-                    },
-                    color: "#818181",
-                  }}
-                  onChange={handleEmail}
-                />
+              <CustomInput errorState={error.emailError}    className="input-email" handlerState={handleEmail} label="Email Address:"></CustomInput>
               </Box>
               {error.emailError && (
                 <Box
@@ -372,23 +320,10 @@ const SignUp = () => {
                   Enter correct email
                 </Box>
               )}
-
+              
               <Box className="input">
-                <TextField
-                  // required
-                  error={error.passwordError}
-                  className="input-password"
-                  id="outlined-required"
-                  label="Create Password:"
-                  size="small"
-                  // diableripple
-                  sx={{
-                    input: { height: "26px", color: "#818181" },
-                    color: "#818181",
-                  }}
-                  onChange={handlePassword}
-                />
-              </Box>
+              <CustomInput errorState={error.passwordError}    className="input-password" handlerState={handlePassword} label="Create Password:"></CustomInput>
+              </Box> 
               {error.passwordError && (
                 <Box
                   style={{
@@ -403,13 +338,16 @@ const SignUp = () => {
 
               <Box className="feature-container">
                 <Box className="check-box">
-                 <Checkbox  sx={{
-            color: "#7754F6",
-          '&.Mui-checked': {
-            color: "#7754F6",
-             },
-             }} {...label} />
-                 I agree to the terms and privacy policy
+                  <Checkbox
+                    sx={{
+                      color: "#7754F6",
+                      "&.Mui-checked": {
+                        color: "#7754F6",
+                      },
+                    }}
+                    {...label}
+                  />
+                  I agree to the terms and privacy policy
                 </Box>
               </Box>
               <Button

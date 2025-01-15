@@ -2,7 +2,6 @@ import React from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import LeftImage from "../../images/left-image.png";
-import TextField from "@mui/material/TextField";
 import "./signin.css";
 import facebook from "../../images/facebook.png";
 import google from "../../images/google.png";
@@ -11,7 +10,7 @@ import twitter from "../../images/twitter.png";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Checkbox from '@mui/material/Checkbox';
-
+import CustomInput from "../../components/input/input";
 // import Typography from '@mui/material/Typography';
 
 const SignIn = () => {
@@ -148,24 +147,8 @@ const SignIn = () => {
           <Box className="form">
             <form action="">
               <Box className="input">
-                <TextField
-                  error={error.emailError}
-                  className="input-email"
-                  // required
-                  id="outlined-required"
-                  label="Email Address"
-                  size="small"
-                  onChange={handleEmail}
-                  sx={{
-                    input: {
-                      height: "26px",
-                      borderRadius: "10px",
-                      color: "#818181",
-                      margin: "0px",
-                    },
-                    color: "#818181",
-                  }}
-                />
+              <CustomInput errorState={error.emailError}    className="input-password" handlerState={handleEmail} label="Email Address"></CustomInput>
+
               </Box>
               {error.emailError && (
                 <Box
@@ -179,23 +162,7 @@ const SignIn = () => {
                 </Box>
               )}
               <Box className="input">
-                <TextField
-                  error={error.passwordError}
-                  className="input-password"
-                  id="outlined-required"
-                  label="Password"
-                  size="small"
-                  onChange={handlePassword}
-                  sx={{
-                    input: {
-                      height: "26px",
-                      borderRadius: "10px",
-                      color: "#818181",
-                      margin: "0px",
-                    },
-                    color: "#818181",
-                  }}
-                />
+              <CustomInput errorState={error.passwordError}    className="input-password" handlerState={handlePassword} label="Password"></CustomInput>
               </Box>
               {error.passwordError && (
                 <Box

@@ -3,12 +3,12 @@ import React from "react";
 
 
 const Home = () => {
-  // const user = localStorage.getItem("current-user")
+ const user = localStorage.getItem("current-user")
 
 
   return (
     <div>
-      <h1>Home</h1>
+    <h2>{user}</h2>
     </div>
   );
 };

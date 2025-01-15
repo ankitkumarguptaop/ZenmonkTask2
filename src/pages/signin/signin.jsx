@@ -9,13 +9,13 @@ import instagram from "../../images/instagram.png";
 import twitter from "../../images/twitter.png";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Checkbox from '@mui/material/Checkbox';
+import Checkbox from "@mui/material/Checkbox";
 import CustomInput from "../../components/input/input";
 // import Typography from '@mui/material/Typography';
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const label = { inputProps: { 'aria-label': 'Checkbox demo'}};
+  const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
   const [input, setInput] = useState({
     email: "",
@@ -103,10 +103,8 @@ const SignIn = () => {
     const particularUser = data[input.email];
     // console.log(data[input.email]);
 
-     if(currentEmailError || currentPasswordError){
-     
-     }
-     else if (
+    if (currentEmailError || currentPasswordError) {
+    } else if (
       data &&
       particularUser &&
       particularUser.email === input.email &&
@@ -117,7 +115,7 @@ const SignIn = () => {
       alert(" User successfuly Sign in !");
       localStorage.setItem(
         "current-user",
-        JSON.stringify(particularUser.email)
+        JSON.stringify(particularUser)
       );
       navigate("/home", {
         state: [input.email, input.password, particularUser.firstName],
@@ -147,8 +145,12 @@ const SignIn = () => {
           <Box className="form">
             <form action="">
               <Box className="input">
-              <CustomInput errorState={error.emailError}    className="input-password" handlerState={handleEmail} label="Email Address"></CustomInput>
-
+                <CustomInput
+                  errorState={error.emailError}
+                  className="input-password"
+                  handlerState={handleEmail}
+                  label="Email Address"
+                ></CustomInput>
               </Box>
               {error.emailError && (
                 <Box
@@ -162,7 +164,12 @@ const SignIn = () => {
                 </Box>
               )}
               <Box className="input">
-              <CustomInput errorState={error.passwordError}    className="input-password" handlerState={handlePassword} label="Password"></CustomInput>
+                <CustomInput
+                  errorState={error.passwordError}
+                  className="input-password"
+                  handlerState={handlePassword}
+                  label="Password"
+                ></CustomInput>
               </Box>
               {error.passwordError && (
                 <Box
@@ -177,12 +184,16 @@ const SignIn = () => {
               )}
               <Box className="feature-container">
                 <Box className="check-box">
-                  <Checkbox  sx={{
-                           color: "#7754F6",
-                         '&.Mui-checked': {
-                           color: "#7754F6",
-                            },
-                            }} {...label} />  Keep me logged in
+                  <Checkbox
+                    sx={{
+                      color: "#7754F6",
+                      "&.Mui-checked": {
+                        color: "#7754F6",
+                      },
+                    }}
+                    {...label}
+                  />{" "}
+                  Keep me logged in
                 </Box>
                 <Box className="forgot-password">
                   <a href="./">Forget password?</a>

@@ -279,7 +279,12 @@ const SignUp = () => {
           <Box className="form">
             <form action="">
               <Box className="input">
-              <CustomInput errorState={error.firstNameError} className="input-password" handlerState={handleFirstName} label="First Name:"></CustomInput>
+                <CustomInput
+                  errorState={error.firstNameError}
+                  className="input-password"
+                  handlerState={handleFirstName}
+                  label="First Name:"
+                ></CustomInput>
                 {error.firstNameError && (
                   <Box
                     style={{
@@ -293,7 +298,12 @@ const SignUp = () => {
                 )}
               </Box>
               <Box className="input">
-              <CustomInput errorState={error.lastNameError}    className="input-password" handlerState={handleLastName} label="Last Name:"></CustomInput>
+                <CustomInput
+                  errorState={error.lastNameError}
+                  className="input-password"
+                  handlerState={handleLastName}
+                  label="Last Name:"
+                ></CustomInput>
               </Box>
               {error.lastNameError && (
                 <Box
@@ -307,7 +317,12 @@ const SignUp = () => {
                 </Box>
               )}
               <Box className="input">
-              <CustomInput errorState={error.emailError}    className="input-email" handlerState={handleEmail} label="Email Address:"></CustomInput>
+                <CustomInput
+                  errorState={error.emailError}
+                  className="input-email"
+                  handlerState={handleEmail}
+                  label="Email Address:"
+                ></CustomInput>
               </Box>
               {error.emailError && (
                 <Box
@@ -320,10 +335,15 @@ const SignUp = () => {
                   Enter correct email
                 </Box>
               )}
-              
+
               <Box className="input">
-              <CustomInput errorState={error.passwordError}    className="input-password" handlerState={handlePassword} label="Create Password:"></CustomInput>
-              </Box> 
+                <CustomInput
+                  errorState={error.passwordError}
+                  className="input-password"
+                  handlerState={handlePassword}
+                  label="Create Password:"
+                ></CustomInput>
+              </Box>
               {error.passwordError && (
                 <Box
                   style={{

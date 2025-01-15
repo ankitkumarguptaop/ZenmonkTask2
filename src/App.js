@@ -1,10 +1,18 @@
+import './app.css'
+import { BrowserRouter} from "react-router-dom";
+import { Box } from '@mui/material';
+import Router from './router/router';
+
+
 
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <Box className="app">
+         <BrowserRouter>
+       <Router></Router>
+    </BrowserRouter>
+    </Box>
   );
 }
 

@@ -100,10 +100,14 @@ const SignIn = () => {
     });
 
     const data = JSON.parse(localStorage.getItem("User"));
-    const particularUser = data[input.email];
+  
     // console.log(data[input.email]);
-
+     let  particularUser=null;
+    if(data){
+      particularUser = data[input.email];
+    }
     if (currentEmailError || currentPasswordError) {
+          alert("please enter right information")
     } else if (
       data &&
       particularUser &&
@@ -146,6 +150,7 @@ const SignIn = () => {
             <form action="">
               <Box className="input">
                 <CustomInput
+                  value={input.email}
                   errorState={error.emailError}
                   className="input-password"
                   handlerState={handleEmail}
@@ -165,6 +170,7 @@ const SignIn = () => {
               )}
               <Box className="input">
                 <CustomInput
+                value={input.password}
                   errorState={error.passwordError}
                   className="input-password"
                   handlerState={handlePassword}

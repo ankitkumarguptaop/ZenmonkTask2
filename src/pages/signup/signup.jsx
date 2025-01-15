@@ -70,10 +70,10 @@ const SignUp = () => {
     setInput({
       email: input.email,
       firstName: input.firstName,
-      lastName: e.target.value,
+      lastName: e.target.value.replace(/\s+/g, " ").trim(),
       password: input.password,
     });
-    if (input.lastName.replace(/\s+/g, " ").trim().length <= 0) {
+    if (e.target.value.replace(/\s+/g, " ").trim().length <= 0) {
       setError({
         emailError: error.emailError,
         passwordError: error.passwordError,
@@ -226,11 +226,15 @@ const SignUp = () => {
     });
 
     const data = JSON.parse(localStorage.getItem("User"));
-    const particularUser = data[input.email];
+    let particularUser=null;
+    if(data){
+      particularUser = data[input.email];
+    }
+
     if (particularUser) {
       alert("Already register!");
       navigate("/");
-    } else if (
+    } else if ( 
       passwordPattern.test(input.password) &&
       input.firstName.replace(/\s+/g, " ").trim().length > 0 &&
       emailPattern.test(input.email)
@@ -280,6 +284,7 @@ const SignUp = () => {
             <form action="">
               <Box className="input">
                 <CustomInput
+                value={input.firstName}
                   errorState={error.firstNameError}
                   className="input-password"
                   handlerState={handleFirstName}
@@ -299,6 +304,7 @@ const SignUp = () => {
               </Box>
               <Box className="input">
                 <CustomInput
+                value={input.lastName}
                   errorState={error.lastNameError}
                   className="input-password"
                   handlerState={handleLastName}
@@ -318,6 +324,7 @@ const SignUp = () => {
               )}
               <Box className="input">
                 <CustomInput
+                 value={input.email}
                   errorState={error.emailError}
                   className="input-email"
                   handlerState={handleEmail}
@@ -338,6 +345,7 @@ const SignUp = () => {
 
               <Box className="input">
                 <CustomInput
+                value={input.password}
                   errorState={error.passwordError}
                   className="input-password"
                   handlerState={handlePassword}

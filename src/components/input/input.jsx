@@ -5,12 +5,13 @@ import { TextField } from '@mui/material'
 import "../../pages/signup/signup.css"
 
 
-const CustomInput = ({errorState,handlerState ,className ,label}) => {
+const CustomInput = ({errorState,handlerState ,className ,label ,value}) => {
   return (
    
    <TextField
                      // required
                      error={errorState}
+                     value={value}
                      className={className}
                      id="outlined-required"
                      label={label}

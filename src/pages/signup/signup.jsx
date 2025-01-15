@@ -226,15 +226,15 @@ const SignUp = () => {
     });
 
     const data = JSON.parse(localStorage.getItem("User"));
-    let particularUser=null;
-    if(data){
+    let particularUser = null;
+    if (data) {
       particularUser = data[input.email];
     }
 
     if (particularUser) {
       alert("Already register!");
       navigate("/");
-    } else if ( 
+    } else if (
       passwordPattern.test(input.password) &&
       input.firstName.replace(/\s+/g, " ").trim().length > 0 &&
       emailPattern.test(input.email)
@@ -284,7 +284,7 @@ const SignUp = () => {
             <form action="">
               <Box className="input">
                 <CustomInput
-                value={input.firstName}
+                  value={input.firstName}
                   errorState={error.firstNameError}
                   className="input-password"
                   handlerState={handleFirstName}
@@ -304,7 +304,7 @@ const SignUp = () => {
               </Box>
               <Box className="input">
                 <CustomInput
-                value={input.lastName}
+                  value={input.lastName}
                   errorState={error.lastNameError}
                   className="input-password"
                   handlerState={handleLastName}
@@ -324,7 +324,7 @@ const SignUp = () => {
               )}
               <Box className="input">
                 <CustomInput
-                 value={input.email}
+                  value={input.email}
                   errorState={error.emailError}
                   className="input-email"
                   handlerState={handleEmail}
@@ -345,7 +345,7 @@ const SignUp = () => {
 
               <Box className="input">
                 <CustomInput
-                value={input.password}
+                  value={input.password}
                   errorState={error.passwordError}
                   className="input-password"
                   handlerState={handlePassword}

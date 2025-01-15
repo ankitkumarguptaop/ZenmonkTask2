@@ -1,15 +1,17 @@
+import { Box } from "@mui/material";
 import React from "react";
+import Navbar from "../../components/navbar/navbar";
 
 
 
 const Home = () => {
- const user = localStorage.getItem("current-user")
+ const user = JSON.parse(localStorage.getItem("current-user"))
 
 
   return (
-    <div>
-    <h2>{user}</h2>
-    </div>
+     <Box className="home-container">
+         <Navbar user={user}></Navbar>
+     </Box>
   );
 };
 

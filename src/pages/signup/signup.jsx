@@ -222,7 +222,14 @@ const SignUp = () => {
       lastNameError: currentLastnameError,
     });
 
-    if (
+
+    const data =JSON.parse(localStorage.getItem("User"));
+    const particularUser = data[input.email];
+    if(particularUser){
+      alert("Already register!");
+      navigate("/");
+    }
+    else if (
       passwordPattern.test(input.password) &&
       input.firstName.replace(/\s+/g, " ").trim().length > 0 &&
       emailPattern.test(input.email)

@@ -9,13 +9,13 @@ import twitter from "../../images/twitter.png";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Checkbox from "@mui/material/Checkbox";
-
 import CustomInput from "../../components/input/input";
 import "./signup.css";
 import { MenuItem, Select } from "@mui/material";
 const SignUp = () => {
   const navigate = useNavigate();
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
+  const [checked, setChecked] = useState(false);
 
   const [input, setInput] = useState({
     firstName: "",
@@ -23,9 +23,8 @@ const SignUp = () => {
     email: "",
     password: "",
   });
+  const [checkboxError, setCheckboxError] = useState(false);
 
-  // const [emailError, setEmailError] = useState(false);
-  // const [passwordError, setPasswordError] = useState(false);
   const [error, setError] = useState({
     firstNameError: false,
     lastNameError: false,
@@ -36,7 +35,6 @@ const SignUp = () => {
   const [userType, setUserType] = useState("user");
 
   function handleFirstName(e) {
-    // setName(e.target.value);
     setInput({
       email: input.email,
       firstName: e.target.value,
@@ -67,39 +65,6 @@ const SignUp = () => {
       });
     }
   }
-
-  // function handleLastName(e) {
-  //   // setName(e.target.value);
-  //   setInput({
-  //     email: input.email,
-  //     firstName: input.firstName,
-  //     lastName: e.target.value.replace(/\s+/g, " ").trim(),
-  //     password: input.password,
-  //   });
-  //   if (e.target.value.replace(/\s+/g, " ").trim().length <= 0) {
-  //     setError({
-  //       emailError: error.emailError,
-  //       passwordError: error.passwordError,
-  //       firstNameError: error.firstNameError,
-  //       lastNameError: true,
-  //     });
-  //   } else {
-  //     setError({
-  //       emailError: error.emailError,
-  //       passwordError: error.passwordError,
-  //       firstNameError: error.firstNameError,
-  //       lastNameError: false,
-  //     });
-  //   }
-  //   if (e.target.value.length <= 0) {
-  //     setError({
-  //       emailError: error.emailError,
-  //       passwordError: error.passwordError,
-  //       firstNameError: error.firstNameError,
-  //       lastNameError: false,
-  //     });
-  //   }
-  // }
 
   function handleEmail(e) {
     setInput({
@@ -174,6 +139,10 @@ const SignUp = () => {
   }
 
   function handleSignUp(e) {
+    if (!checked) {
+      setCheckboxError(true);
+      return;
+    }
     e.preventDefault();
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordPattern =
@@ -184,12 +153,7 @@ const SignUp = () => {
     let currentLastnameError = false;
     if (!emailPattern.test(input.email)) {
       currentEmailError = true;
-      // setError({
-      //   emailError:true,
-      //   passwordError: error.passwordError,
-      //   firstNameError:error.firstNameError,
-      //   lastNameError:error.lastNameError
-      //  });
+
       console.log(error);
     }
     if (
@@ -197,33 +161,10 @@ const SignUp = () => {
       input.firstName <= 0
     ) {
       currentFirstNameError = true;
-      // setError({
-      //   emailError: error.emailError,
-      //   passwordError: error.passwordError,
-      //   firstNameError: true,
-      //   lastNameError:error.lastNameError
-      // });
     }
-    // if (
-    //   input.lastName.replace(/\s+/g, " ").trim().length <= 0 ||
-    //   input.lastName <= 0
-    // ) {
-    //   currentLastnameError = true;
-    //   // setError({
-    //   //   emailError: error.emailError,
-    //   //   passwordError: error.passwordError,
-    //   //   firstNameError: error.lastNameError,
-    //   //   lastNameError:true
-    //   // });
-    // }
+
     if (!passwordPattern.test(input.password)) {
       currentPasswordError = true;
-      // setError({
-      //   emailError: error.emailError,
-      //   passwordError: true,
-      //   firstNameError: error.nameError,
-      //   lastNameError:error.lastNameError
-      // });
     }
 
     setError({
@@ -325,6 +266,10 @@ const SignUp = () => {
     }
   }
 
+  function handleCheckbox() {
+    setChecked(!checked);
+  }
+
   return (
     <Box className="container-signup">
       <Box className="left-container">
@@ -367,13 +312,6 @@ const SignUp = () => {
                   <MenuItem value={"user"}>User</MenuItem>
                   <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
                 </Select>
-                {/* <CustomInput
-                  value={input.lastName}
-                  errorState={error.lastNameError}
-                  className="input-password"
-                  handlerState={handleLastName}
-                  label="Last Name:"
-                ></CustomInput> */}
               </Box>
               {error.lastNameError && (
                 <Box
@@ -431,6 +369,8 @@ const SignUp = () => {
               <Box className="feature-container">
                 <Box className="check-box">
                   <Checkbox
+                    onClick={handleCheckbox}
+                    checked={checked}
                     sx={{
                       color: "#7754F6",
                       "&.Mui-checked": {
@@ -440,6 +380,17 @@ const SignUp = () => {
                     {...label}
                   />
                   I agree to the terms and privacy policy
+                  {checkboxError && (
+                    <Box
+                      style={{
+                        color: "red",
+                        marginTop: "-14px",
+                        marginBottom: "10px",
+                      }}
+                    >
+                      Please tick checkbox
+                    </Box>
+                  )}
                 </Box>
               </Box>
               <Button

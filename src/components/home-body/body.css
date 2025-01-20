@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  background-color: #fc8019;
+
+  .image-box {
+    margin-top: 10px;
+  }
+  img {
+    width: 75vw;
+    height: 50vh;
+  }
+}
+
+.restaurant-rapper {
+  display: flex;
+}
+
+.restaurant-card {
+  margin: 20px;
+  img {
+    height: 200px;
+    width: 350px;
+    border-radius: 10px;
+  }
+
+  .details-container {
+    display: flex;
+    flex-direction: column;
+    height: 35px;
+    width: 350px;
+    background-color: white;
+    color: #000000;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+  }
+}

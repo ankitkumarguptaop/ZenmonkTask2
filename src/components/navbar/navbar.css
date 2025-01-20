@@ -1,4 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+    max-width:100%;
+   
+
+}
 .navbar-container{
+    position: sticky;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -18,7 +27,6 @@
 
 .swiggy-logo{
     width: 700px;
-   
     margin-right: 120px;
     margin-left: 15px;
 }

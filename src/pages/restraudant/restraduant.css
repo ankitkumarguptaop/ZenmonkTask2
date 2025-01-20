@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    max-width:100%;
+}
+
+
+.display-menu{
+    display: flex;
+}
+
+.menu-card{
+    margin: 10px;
+}
+
+.price-ratting{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.quantity-setting{
+    display: flex;
+}
+
+.increment{
+    width: 20px;
+}
+
+.quantity{
+    margin: 6px;
+}
+
+
+.alert-messsage{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+  }

@@ -6,7 +6,6 @@ import "../../pages/signup/signup.css";
 const CustomInput = ({ errorState, handlerState, className, label, value }) => {
   return (
     <TextField
-      // required
       error={errorState}
       value={value}
       className={className}

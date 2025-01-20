@@ -11,7 +11,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Checkbox from "@mui/material/Checkbox";
 import CustomInput from "../../components/input/input";
-// import Typography from '@mui/material/Typography';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -22,8 +21,6 @@ const SignIn = () => {
     password: "",
   });
 
-  // const [emailError, setEmailError] = useState(false);
-  // const [passwordError, setPasswordError] = useState(false);
   const [error, setError] = useState({
     emailError: false,
     passwordError: false,
@@ -101,7 +98,6 @@ const SignIn = () => {
 
     const data = JSON.parse(localStorage.getItem("User"));
     const restaurantData = JSON.parse(localStorage.getItem("Restaurant"));
-    // console.log(data[input.email]);
     let particularUser = null;
     let particularRestaurant = null;
     if (restaurantData) {
